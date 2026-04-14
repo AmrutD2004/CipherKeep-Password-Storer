@@ -11,7 +11,7 @@ const app = express()
 const PORT = 4000
 app.use(express.json())
 app.use(cookieParser())
-const allOrigins = ['http://localhost:5174', 'http://localhost:5173']
+const allOrigins = ['http://localhost:5174', 'http://localhost:5173', 'https://cipher-keep-password-storer-13a5.vercel.app']
 app.use(cors({origin: allOrigins ,credentials : true}))
 app.get('/', (req, res)=>{
     res.send('Hello')
