@@ -1,17 +1,17 @@
 import axios from 'axios'
 
 const api = axios.create({
-    baseURL : "http://localhost:4000/",
+    baseURL : "https://cipher-keep-password-storer-a8n6.vercel.app/",
     withCredentials : true
 })
 
 export const userRegister = async(payload: any)=>{
-    const response = await api.post(`http://localhost:4000/user/auth/register`, payload)
+    const response = await api.post(`user/auth/register`, payload)
     return response.data
 }
 
 export const userLogin = async(payload: any)=>{
-    const response = await api.post(`http://localhost:4000/user/auth/login`, payload)
+    const response = await api.post(`user/auth/login`, payload)
     return response.data
 }
 
