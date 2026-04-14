@@ -23,11 +23,12 @@ const Vault = () => {
   }, [usersPasswords])
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const keyword = e.target.value
+    const keyword = e.target.value.toLowerCase()
     if (!keyword) {
       setSearchPassword(usersPasswords)
+      return
     }
-    const filtered = usersPasswords.filter((f: any) => f.website.toLowerCase().includes(keyword))
+    const filtered = usersPasswords.filter((f: any) => f.website?.toLowerCase().includes(keyword))
     setSearchPassword(filtered)
   }
   const handleCopy = async (password: any) => {
