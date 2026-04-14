@@ -88,12 +88,12 @@ const EditPasswordDetails = ({ onClose, password }: props) => {
     return (
         <div className='fixed inset-0 bg-black/30 z-50'>
             <div className='flex items-center justify-center min-h-screen'>
-                <div className='px-5 py-8 bg-white w-120 rounded-lg border border-neutral-300 shadow'>
-                    <div className='flex items-center justify-between w-full mb-10'>
-                        <h1 className='text-neutral-800 tracking-tight text-base'>Add Password</h1>
+                <div className='mx-3 lg:mx-0 px-5 py-8 bg-white w-120 rounded-lg border border-neutral-300 shadow'>
+                    <div className='flex items-center justify-between w-full mb-5 lg:mb-10'>
+                        <h1 className='text-neutral-800 tracking-tight text-base'>Edit Password of <strong className='text-lime-500 text-lg ms-1'>{password.website}</strong></h1>
                         <button className='cursor-pointer hover:text-red-500 transition-colors duration-200' onClick={onClose}><X size={18} /></button>
                     </div>
-                    <form onSubmit={handleSubmit} className='flex flex-col items-start justify-start gap-3 w-full'>
+                    <form onSubmit={handleSubmit} className='flex flex-col items-start justify-start gap-2 lg:gap-3 w-full'>
                         <div className='flex flex-col items-start justify-start gap-1 w-full'>
                             <label className='text-sm font-medium text-neutral-800'>Website</label>
                             <input onChange={handleChange} type="text" name='website' value={formData.website} className='w-full px-3 py-1 rounded-lg outline-none text-sm border border-neutral-300 font-normal text-neutral-700' placeholder='Enter the website name' />

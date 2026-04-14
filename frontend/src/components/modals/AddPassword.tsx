@@ -107,12 +107,12 @@ const AddPassword = ({ onClose }: onclose) => {
     return (
         <div className='fixed inset-0 bg-black/30 z-50'>
             <div className='flex items-center justify-center min-h-screen'>
-                <div className='px-5 py-8 bg-white w-120 rounded-lg border border-neutral-300 shadow'>
-                    <div className='flex items-center justify-between w-full mb-10'>
+                <div className='mx-3 lg:mx-0 px-5 py-8 bg-white w-120 rounded-lg border border-neutral-300 shadow relative'>
+                    <div className='flex items-center justify-between w-full mb-5 lg:mb-10'>
                         <h1 className='text-neutral-800 tracking-tight text-base'>Add Password</h1>
-                        <button className='cursor-pointer hover:text-red-500 transition-colors duration-200' onClick={onClose}><X size={18} /></button>
+                        <button className='cursor-pointer hover:text-red-500 transition-colors duration-200 absolute right-2 top-3' onClick={onClose}><X size={18} /></button>
                     </div>
-                    <div className='flex flex-col items-start justify-start gap-3 w-full'>
+                    <div className='flex flex-col items-start justify-start gap-2 lg:gap-3 w-full'>
                         <div className='flex flex-col items-start justify-start gap-1 w-full'>
                             <label className='text-sm font-medium text-neutral-800'>Website</label>
                             <input onChange={handleChange} type="text" name='website' value={formData.website} className='w-full px-3 py-1 rounded-lg outline-none text-sm border border-neutral-300' placeholder='Enter the website name' />

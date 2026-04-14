@@ -3,52 +3,61 @@ import Sidebar from './Sidebar'
 import Inappnavbar from './Inappnavbar'
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-  const [isSideBarOpen, setIssidebaropen] = useState(true)
+  // Default to false to avoid SSR hydration mismatch
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   useEffect(() => {
+    // Set initial state after mount based on viewport width
     const handleResize = () => {
-      if (window.innerWidth < 768) {
-        setIssidebaropen(false)
-      } else {
-        setIssidebaropen(true)
-      }
+      setIsSidebarOpen(window.innerWidth >= 768) // md breakpoint
     }
 
     handleResize()
     window.addEventListener('resize', handleResize)
-
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  return (
-    <div className="h-screen flex">
+  // Helper toggle to prevent direct setter misuse in navbar
+  const toggleSidebar = () => setIsSidebarOpen(prev => !prev)
 
-      {/* Sidebar */}
-      {isSideBarOpen && (
-        <div className="fixed left-0 top-0 h-full w-64 z-40 bg-white border-r">
-          <Sidebar />
-        </div>
+  return (
+    <div className="min-h-screen flex bg-gray-50">
+      {/* Mobile Overlay Backdrop */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/40 z-30 md:hidden transition-opacity duration-300"
+          onClick={toggleSidebar}
+        />
       )}
 
-      {/* Right Section */}
-      <div className={`flex flex-col flex-1 ${isSideBarOpen ? 'ml-64' : ''}`}>
+      {/* Sidebar */}
+      <aside
+        className={`fixed top-0 left-0 h-full w-64 bg-white border-r z-40 transform transition-transform duration-300 ease-in-out
+          ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+        `}
+      >
+        <Sidebar />
+      </aside>
 
+      {/* Main Content Wrapper */}
+      <div className={`flex flex-col flex-1 min-w-0 transition-all duration-300 ${isSidebarOpen ? 'md:ml-64' : ''}`}>
+        
         {/* Navbar */}
-        <div
-          className={`fixed top-0 h-16 z-30 bg-white border-b transition-all duration-300
-          ${isSideBarOpen ? 'left-64 w-[calc(100%-16rem)]' : 'left-0 w-full'}`}
+        <header
+          className={`fixed top-0 z-30 h-16 bg-white border-b transition-all duration-300
+            ${isSidebarOpen ? 'left-0 md:left-64 md:w-[calc(100%-16rem)]' : 'left-0 w-full'}
+          `}
         >
           <Inappnavbar
-            setIssidebaropen={setIssidebaropen}
-            isSideBarOpen={isSideBarOpen}
+            setIssidebaropen={toggleSidebar}
+            isSideBarOpen={isSidebarOpen}
           />
-        </div>
+        </header>
 
         {/* Scrollable Content */}
-        <main className="mt-16 h-[calc(100vh-4rem)] overflow-y-auto bg-gray-100 p-4">
+        <main className="mt-16 flex-1 overflow-y-auto">
           {children}
         </main>
-
       </div>
     </div>
   )
