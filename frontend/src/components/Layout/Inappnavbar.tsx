@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { ArrowLeft, ArrowRight, ChevronDown, ChevronUp, LogOut, Search, User } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ChevronDown, ChevronUp, LogOut, Menu, Search, User } from 'lucide-react'
 import { AuthContext } from '@/context/authContext'
 import { Link } from 'react-router-dom'
 
@@ -34,10 +34,16 @@ const Inappnavbar = ({ setIssidebaropen, isSideBarOpen }: Props) => {
 
         {/* Toggle */}
         <button
-          className="p-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition"
+          className="hidden lg:block p-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition"
           onClick={() => setIssidebaropen(!isSideBarOpen)}
         >
           {isSideBarOpen ? <ArrowLeft size={18} /> : <ArrowRight size={18} />}
+        </button>
+        <button
+          className="lg:hidden p-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition"
+          onClick={() => setIssidebaropen(!isSideBarOpen)}
+        >
+          <Menu size={18}/>
         </button>
 
       </div>

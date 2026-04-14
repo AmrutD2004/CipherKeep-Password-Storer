@@ -130,10 +130,10 @@ const Dashboard = () => {
   return (
     <>
       <Layout>
-        <div className="max-w-6xl mx-auto bg-gray-100 flex flex-col space-y-5">
+        <div className="lg:max-w-6xl mx-auto bg-gray-100 flex flex-col space-y-5">
 
           {/* Header */}
-          <div className='flex items-center justify-between w-full'>
+          <div className='flex flex-col lg:flex-row lg:items-center lg:justify-between w-full'>
             <div className='py-6 flex flex-col items-start gap-1'>
               <h1 className='text-3xl font-semibold tracking-tight text-neutral-800'>
                 Welcome back! {userInfo?.firstname}👋
@@ -180,16 +180,16 @@ const Dashboard = () => {
     <>
       <Layout>
         <div className='bg-gray-100 flex flex-col space-y-5 3xl:max-w-7xl'>
-          <div className='flex items-center justify-between w-full'>
+          <div className='flex flex-col lg:flex-row items-start lg:items-center lg:justify-between w-full px-3 lg:px-0'>
             <div className='py-6 flex flex-col items-start justify-start gap-1'>
-              <h1 className='text-3xl font-semibold tracking-tight text-neutral-800'>Welcome back! {userInfo?.firstname}👋</h1>
+              <h1 className='text-2xl lg:text-3xl font-semibold tracking-tight text-neutral-800'>Welcome back! {userInfo?.firstname}👋</h1>
               <span className='tracking-tight text-sm text-neutral-500 font-medium'>{todaysDate}</span>
             </div>
             <button onClick={() => setOpen(true)} className='flex items-center gap-1 px-3 py-1 text-sm rounded-lg bg-lime-500 text-white font-medium tracking-tight shadow cursor-pointer hover:bg-lime-600 transition-colors duration-200'><Plus size={18} />Add Password</button>
           </div>
-          <div className='grid grid-cols-1 lg:grid-cols-3 gap-3'>
+          <div className='grid grid-cols-1 lg:grid-cols-3 gap-3 px-3 lg:px-0'>
             {grids.map((items, idx) => (
-              <div key={idx} className={`border w-84 border-neutral-300 rounded-lg shadow px-5 py-3 flex flex-col items-start justify-start gap-2 bg-white hover:border-1.5 hover:scale-101 ${items.hoverBorder} transition-all duration-300`}>
+              <div key={idx} className={`border lg:w-84 border-neutral-300 rounded-lg shadow px-5 py-3 flex flex-col items-start justify-start gap-2 bg-white hover:border-1.5 hover:scale-101 ${items.hoverBorder} transition-all duration-300`}>
                 <span className={`p-2 bg-gray-100 rounded-lg ${items.bgcolor}`}>{items.icon}</span>
                 <h1 className='text-neutral-500 font-medium tracking-tight'>{items.title}</h1>
                 <span className={`${items.bgcolor} text-3xl font-semibold`}>{items.length}</span>
@@ -201,7 +201,7 @@ const Dashboard = () => {
               <h1 className='text-xl tracking-tight text-neutral-800 font-medium leading-tight'>Recent Passwords</h1>
               <Link to={'/vault'} className='px-3 py-1 text-sm tracking-tight border border-lime-300 text-lime-500 rounded-lg hover:bg-lime-100 transition-colors duration-200'>View All</Link>
             </div>
-            <div className='px-5 py-4 w-full'>
+            <div className='px-5 py-4 w-full overflow-x-auto'>
               <table className='w-full border-collapse'>
                 <thead>
                   <tr className="border-t border-b bg-gray-50 ">
