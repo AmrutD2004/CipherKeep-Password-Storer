@@ -88,7 +88,7 @@ const Vault = () => {
   return (
     <>
       <Layout>
-        <div className='bg-gray-100 flex flex-col space-y-5 3xl:max-w-7xl overflow-hidden'>
+        <div className='bg-gray-100 flex flex-col space-y-3 lg:space-y-5 3xl:max-w-7xl overflow-hidden px-3 lg:px-0'>
           <div className='w-full flex items-center justify-between'>
             <div className='px-5 py-3 flex items-center justify-start gap-4'>
               <h1 className='text-2xl tracking-tight leading-tight'>My Vault</h1>
@@ -99,11 +99,11 @@ const Vault = () => {
               <button onClick={() => setLayout('list')} className={` p-2 rounded-lg  cursor-pointer transition-colors duration-200 ${layout === 'list' ? 'text-lime-500 bg-lime-200' : 'text-neutral-500 hover:bg-gray-200'}`}><List size={18} /></button>
             </div>
           </div>
-          <div className='w-full flex flex-col items-start justify-start gap-1 px-5 py-3 relative'>
-            <Search size={16} className='absolute top-[19px] left-7 text-neutral-500 outline-none' />
+          <div className='w-full flex flex-col items-start justify-start gap-1 lg:px-5 py-3 relative'>
+            <Search size={16} className='absolute top-[19px] left-3 lg:left-7 text-neutral-500 outline-none' />
             <input onChange={(e) => handleSearch(e)} type='text' className='w-full bg-white px-8 py-1 text-sm font-normal rounded-lg border border-neutral-300' placeholder='Search Password' />
           </div>
-          <div className='flex mx-5 gap-5 leading-tight'>
+          <div className='hidden lg:flex mx-5 gap-5 leading-tight'>
             <button onClick={() => {
               setSearchPassword(usersPasswords)
               setActiveCategory('')
@@ -118,7 +118,7 @@ const Vault = () => {
 
           {layout === 'list' && (
 
-            <div className='px-5 py-4 w-full border border-neutral-300 rounded-lg bg-white shadow'>
+            <div className='px-5 py-4 w-full border border-neutral-300 rounded-lg bg-white shadow overflow-x-auto'>
               <table className='w-full border-collapse'>
                 <thead>
                   <tr className="border-t border-b bg-gray-50 ">
@@ -186,11 +186,11 @@ const Vault = () => {
           )}
 
           {layout === 'grid' && (
-            <div className='w-full grid grid-cols-1 lg:grid-cols-3 gap-3 mx-5'>
+            <div className='w-full grid grid-cols-1 lg:grid-cols-3 gap-3 '>
               {searchPassword.map((item: any) => (
                 <div key={item.cred_id} className='border border-neutral-300 px-5 py-3 bg-white rounded-lg shadow  group w-full hover:scale-102 transition-all duration-300'>
                   <div className='w-full flex flex-col items-start justify-start gap-2'>
-                    <div className='flex items-center w-full  gap-2'>
+                    <div className='flex flex-col lg:flex-row items-center w-full  gap-2'>
                       <div className='flex items-center gap-3 w-full'>
                         <span className='py-1 px-3 text-lime-500 bg-lime-200 rounded-lg'>{item?.website?.[0]}</span>
                         <div className='flex flex-col items-start justify-start leading-tight'>
@@ -198,7 +198,7 @@ const Vault = () => {
                           <span className='text-sm text-neutral-500 font-normal'>{item.usernameoremail}</span>
                         </div>
                       </div>
-                      <div className='flex items-center ms-auto justify-end gap-2 w-full opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
+                      <div className='flex items-center ms-auto lg:justify-end gap-2 w-full opacity-100 lg:opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
                         <button onClick={() => handleCopy(item.password)} className='text-neutral-500 p-1 hover:bg-lime-100 rounded-lg cursor-pointer hover:text-lime-500 transition-colors duration-200'><Copy size={16} /></button>
                         <button onClick={() => {
                           setOpenEdit(true)
