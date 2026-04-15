@@ -212,7 +212,7 @@ const Auth = () => {
     return (
         <div className='max-w-7xl mx-auto '>
             <div className='flex items-center justify-center min-h-screen'>
-                <div className='px-5 py-3 border rounded-lg shadow w-100 flex flex-col gap-5 items-center justify-center'>
+                <div className='px-5 py-3 border rounded-lg shadow w-100 flex flex-col gap-5 items-center justify-center mx-3'>
                     <label className='font-semibold tracking-tight text-lime-500 text-2xl text-shadow-sm '>CipherKeep</label>
                     <div className='w-full  flex items-center justify-between border rounded-lg overflow-hidden py-2 bg-gray-100'>
                         <button onClick={() => setOperation('signup')} className={`w-full font-semibold tracking-tight mx-2 py-1  rounded-lg text-neutral-700 text-sm ${operation === 'signup' && 'bg-lime-400'}`}>Sign Up</button>
@@ -264,7 +264,7 @@ const Auth = () => {
                                 <div className='flex flex-col items-start justify-start gap-1 w-full relative'>
                                     <label className='text-sm font-semibold text-neutral-600 tracking-tight'>Password</label>
                                     <input onChange={handleSignInChange} type={`${seePassword ? 'text' : 'password'}`} name='password' value={signIn.password} className='w-full px-3 py-1 text-sm border border-neutral-300 rounded-lg placeholder:text-xs outline-none' placeholder='Enter Password' />
-                                    <button type='button' onClick={() => setSeePassword(!seePassword)} className='absolute right-3 bottom-1.5 text-neutral-500 cursor-pointer'>{seePassword ? <EyeClosed size={16} /> : <Eye size={16} />}</button>
+                                    <button  type='button' onClick={() => setSeePassword(!seePassword)} className='absolute right-3 bottom-1.5 text-neutral-500 cursor-pointer'>{seePassword ? <EyeClosed size={16} /> : <Eye size={16} />}</button>
                                 </div>
                                 <div className='w-full my-3 text-sm flex items-center justify-center '>
                                     {signInLoading ? <button disabled className='py-2 rounded-lg cursor-pointer font-semibold text-neutral-500 tracking-tight  bg-lime-200 w-full flex items-center justify-center gap-1'><Loader2 className="animate-spin " size={16} />Signing In...</button>

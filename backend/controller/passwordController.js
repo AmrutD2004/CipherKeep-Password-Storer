@@ -1,5 +1,8 @@
 import client from "../database/database.js";
 import axios from "axios";
+import bcrypt from 'bcryptjs'
+import { encrypt } from "../utils/encryption.js";
+import { decrypt } from "../utils/encryption.js";
 
 
 export const addPassword = async (req, res) => {
@@ -19,8 +22,9 @@ export const addPassword = async (req, res) => {
             message: 'All fields are required'
         })
     }
+    const hashPassword = encrypt(password)
     try {
-        const result = await client.query(`Insert into "Credentials"( "user_id", "website", "websiteUrl", "usernameoremail", "password", "category", "notes") values ($1, $2, $3, $4, $5, $6, $7) returning *`, [userID, website, websiteUrl, usernameoremail, password, category, notes])
+        const result = await client.query(`Insert into "Credentials"( "user_id", "website", "websiteUrl", "usernameoremail", "password", "category", "notes") values ($1, $2, $3, $4, $5, $6, $7) returning *`, [userID, website, websiteUrl, usernameoremail, hashPassword, category, notes])
 
         return res.json({
             success: true,
@@ -48,10 +52,24 @@ export const getUserPasswords = async (req, res) => {
     try {
 
         let result = await client.query(` select "user_id", "cred_id", "website", "websiteUrl", "usernameoremail", "password", "category", "notes", "created_at" from "Credentials" where user_id = $1 `, [userID])
+        const decryptedData = result.rows.map((item) => {
+            try {
+                if (!item.password.includes(':')) {
+                    return { ...item, password: item.password }; // fallback
+                }
+
+                return {
+                    ...item,
+                    password: decrypt(item.password)
+                };
+            } catch (err) {
+                return { ...item, password: 'ERROR' };
+            }
+        });
 
         return res.json({
             success: true,
-            data: result.rows
+            data: decryptedData
         })
 
     } catch (err) {
@@ -92,7 +110,8 @@ export const editPassword = async (req, res) => {
             message: 'Password not found'
         })
     }
-    result = await client.query(` UPDATE "Credentials" SET "website" = $1, "websiteUrl" = $2, "usernameoremail" = $3, "password" = $4, "category" = $5, "notes" = $6 where "cred_id" = $7 AND user_id = $8`, [website, websiteUrl, usernameoremail, password, category, notes, cred_id, userID])
+    const hashPassword = encrypt(password)
+    result = await client.query(` UPDATE "Credentials" SET "website" = $1, "websiteUrl" = $2, "usernameoremail" = $3, "password" = $4, "category" = $5, "notes" = $6 where "cred_id" = $7 AND user_id = $8`, [website, websiteUrl, usernameoremail, hashPassword, category, notes, cred_id, userID])
 
     return res.json({
         success: true,

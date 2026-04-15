@@ -218,3 +218,40 @@ export const getUserData = async (req, res) => {
 
 
 }
+
+export const updateUserDetails = async (req, res) => {
+    const { userID } = req.user;
+    if (!userID) {
+        return res.json({
+            success: false,
+            message: 'Not authorized please login again'
+        })
+    }
+    const { username, email } = req.body;
+    if (!username && !email) {
+        return res.json({
+            success: false,
+            message: 'Fields is missing'
+        })
+    }
+
+    try {
+        let result = await client.query(`select * from Users where user_id = $1`, [userID])
+        if (result.rows.length === 0) {
+            return res.json({
+                success: false,
+                message: "User doesn't exists!"
+            })
+        }
+        result = await client.query(`update Users set username = $1, email = $2 where user_id = $3`, [username, email, userID])
+        return res.json({
+            success: true,
+            message: 'Details updated successfully'
+        })
+    } catch (err) {
+        return res.json({
+            success: false,
+            message: err.message
+        })
+    }
+} 
