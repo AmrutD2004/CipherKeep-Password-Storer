@@ -2,7 +2,7 @@ import axios from 'axios'
 
 
 const api = axios.create({
-    baseURL : "http://localhost:4000/",
+    baseURL : "https://cipher-keep-password-storer-a8n6.vercel.app/",
     withCredentials : true
 })
 
@@ -56,7 +56,9 @@ export const deletePassword = async(id:number)=>{
     return response.data
 }
 
+
 export const updateUserDetials = async(payload : {})=>{
     const response = await api.put(`user/auth/updateUserdetails`, payload)
     return response.data
 }
+
