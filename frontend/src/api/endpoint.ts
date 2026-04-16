@@ -56,7 +56,9 @@ export const deletePassword = async(id:number)=>{
     return response.data
 }
 
+
 export const updateUserDetials = async(payload : {})=>{
     const response = await api.put(`user/auth/updateUserdetails`, payload)
     return response.data
 }
+
