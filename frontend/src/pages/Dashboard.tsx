@@ -53,6 +53,15 @@ const Dashboard = () => {
       weak++
     }
   })
+  const isStorng = usersPasswords.forEach((item: any) => {
+    if (checkPasswordStrength(item.password) === 'strong') {
+      return 'strong'
+    }
+    if (checkPasswordStrength(item.password) === 'weak') {
+      return 'weak'
+    }
+  })
+
 
   const grids = [
     {
@@ -126,56 +135,56 @@ const Dashboard = () => {
     )
   }
 
- if (usersPasswords.length === 0) {
-  return (
-    <>
-      <Layout>
-        <div className="lg:max-w-6xl mx-auto bg-gray-100 flex flex-col space-y-5">
+  if (usersPasswords.length === 0) {
+    return (
+      <>
+        <Layout>
+          <div className="lg:max-w-6xl mx-auto bg-gray-100 flex flex-col space-y-5">
 
-          {/* Header */}
-          <div className='flex flex-col lg:flex-row lg:items-center lg:justify-between w-full'>
-            <div className='py-6 flex flex-col items-start gap-1'>
-              <h1 className='text-3xl font-semibold tracking-tight text-neutral-800'>
-                Welcome back! {userInfo?.firstname}👋
-              </h1>
-              <span className='text-sm text-neutral-500 font-medium'>
-                {todaysDate}
-              </span>
+            {/* Header */}
+            <div className='flex flex-col lg:flex-row lg:items-center lg:justify-between w-full'>
+              <div className='py-6 flex flex-col items-start gap-1'>
+                <h1 className='text-3xl font-semibold tracking-tight text-neutral-800'>
+                  Welcome back! {userInfo?.firstname}👋
+                </h1>
+                <span className='text-sm text-neutral-500 font-medium'>
+                  {todaysDate}
+                </span>
+              </div>
+
+              <button
+                onClick={() => setOpen(true)}
+                className='flex items-center gap-1 px-3 py-1 text-sm rounded-lg bg-lime-500 text-white font-medium shadow hover:bg-lime-600 transition'
+              >
+                <Plus size={18} />
+                Add Password
+              </button>
             </div>
 
-            <button
-              onClick={() => setOpen(true)}
-              className='flex items-center gap-1 px-3 py-1 text-sm rounded-lg bg-lime-500 text-white font-medium shadow hover:bg-lime-600 transition'
-            >
-              <Plus size={18} />
-              Add Password
-            </button>
+            {/* EMPTY STATE MESSAGE 👇 */}
+            <div className="flex flex-col items-center justify-center h-[50vh] text-center">
+              <p className="text-lg font-medium text-neutral-600">
+                No passwords saved yet
+              </p>
+              <p className="text-sm text-neutral-400 mt-1">
+                Click "Add Password" to get started
+              </p>
+
+              <button
+                onClick={() => setOpen(true)}
+                className="mt-4 px-4 py-2 bg-lime-500 text-white rounded-lg hover:bg-lime-600"
+              >
+                + Add Password
+              </button>
+            </div>
+
           </div>
+        </Layout>
 
-          {/* EMPTY STATE MESSAGE 👇 */}
-          <div className="flex flex-col items-center justify-center h-[50vh] text-center">
-            <p className="text-lg font-medium text-neutral-600">
-              No passwords saved yet
-            </p>
-            <p className="text-sm text-neutral-400 mt-1">
-              Click "Add Password" to get started
-            </p>
-
-            <button
-              onClick={() => setOpen(true)}
-              className="mt-4 px-4 py-2 bg-lime-500 text-white rounded-lg hover:bg-lime-600"
-            >
-              + Add Password
-            </button>
-          </div>
-
-        </div>
-      </Layout>
-
-      {open && <AddPassword onClose={() => setOpen(false)} />}
-    </>
-  )
-}
+        {open && <AddPassword onClose={() => setOpen(false)} />}
+      </>
+    )
+  }
   return (
     <>
       <Layout>
@@ -206,6 +215,7 @@ const Dashboard = () => {
                 <thead>
                   <tr className="border-t border-b bg-gray-50 ">
                     <th className="text-left text-sm text-neutral-500 font-medium py-3 px-4">Website</th>
+                    <th className="text-center text-sm text-neutral-500 font-medium py-3 px-4">Password Status</th>
                     <th className="text-left text-sm text-neutral-500 font-medium py-3 px-4">Username / Email</th>
                     <th className="text-left text-sm text-neutral-500 font-medium py-3 px-4">Created At</th>
                     <th className="text-center text-sm text-neutral-500 font-medium py-3 px-4">Actions</th>
@@ -222,9 +232,18 @@ const Dashboard = () => {
                             {item.website?.[0]}
                           </span>
                           {item.website}
+
                         </div>
                       </td>
 
+                      <td className="py-3 px-4 text-sm text-neutral-600 text-center">
+                        <span className={`text-xs px-2 py-0.5 rounded ${checkPasswordStrength(item.password) === 'strong'
+                          ? 'bg-green-100 text-green-600'
+                          : 'bg-red-100 text-red-600'
+                          }`}>
+                          {checkPasswordStrength(item.password)}
+                        </span>
+                      </td>
                       {/* Username */}
                       <td className="py-3 px-4 text-sm text-neutral-600">
                         {item.usernameoremail}
@@ -251,7 +270,7 @@ const Dashboard = () => {
                             <Edit size={18} />
                           </button>
 
-                          <button onClick={() =>{
+                          <button onClick={() => {
                             setOpenDelete(true)
                             setSelectedPassword(item)
                           }} className="text-neutral-600 p-2 hover:bg-lime-100 hover:text-red-500 transition-colors duration-300 cursor-pointer rounded-lg group relative">
@@ -271,7 +290,7 @@ const Dashboard = () => {
       </Layout>
       {open && <AddPassword onClose={() => setOpen(false)} />}
       {openEdit && <EditPasswordDetails onClose={() => setOpenEdit(false)} password={selectedPassword} />}
-        {openDelete && <ConfirmDelete onClose={() => setOpenDelete(false)} password={selectedPassword} />}
+      {openDelete && <ConfirmDelete onClose={() => setOpenDelete(false)} password={selectedPassword} />}
     </>
   )
 }
@@ -323,6 +342,7 @@ const SkeletonDashboard = () => {
                 <div className="h-4 w-40 bg-gray-300 rounded"></div>
               </div>
               <div className="h-4 w-32 bg-gray-300 rounded"></div>
+              <div className="h-4 w-24 bg-gray-300 rounded"></div>
               <div className="h-4 w-24 bg-gray-300 rounded"></div>
               <div className="flex gap-2">
                 <div className="h-8 w-8 bg-gray-300 rounded"></div>

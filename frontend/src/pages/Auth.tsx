@@ -5,7 +5,7 @@ import toast from 'react-hot-toast'
 import GoogleLoginn from '@/components/GoogleLogin.tsx'
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { AuthContext } from '@/context/authContext.tsx'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Auth = () => {
     const clientID = import.meta.env.VITE_GOOGLE_CLIENT_ID
@@ -213,7 +213,7 @@ const Auth = () => {
         <div className='max-w-7xl mx-auto '>
             <div className='flex items-center justify-center min-h-screen'>
                 <div className='px-5 py-3 border rounded-lg shadow w-100 flex flex-col gap-5 items-center justify-center mx-3'>
-                    <label className='font-semibold tracking-tight text-lime-500 text-2xl text-shadow-sm '>CipherKeep</label>
+                    <Link to={'/'} className='font-semibold tracking-tight text-lime-500 text-2xl text-shadow-sm '>CipherKeep</Link>
                     <div className='w-full  flex items-center justify-between border rounded-lg overflow-hidden py-2 bg-gray-100'>
                         <button onClick={() => setOperation('signup')} className={`w-full font-semibold tracking-tight mx-2 py-1  rounded-lg text-neutral-700 text-sm ${operation === 'signup' && 'bg-lime-400'}`}>Sign Up</button>
                         <button onClick={() => setOperation('signin')} className={`w-full font-semibold tracking-tight mx-2 py-1  rounded-lg text-neutral-700 text-sm ${operation === 'signin' && 'bg-lime-400'}`}>Sign In</button>
