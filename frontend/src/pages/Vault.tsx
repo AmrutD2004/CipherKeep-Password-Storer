@@ -3,6 +3,7 @@ import ConfirmDelete from '@/components/modals/ConfirmDelete'
 import EditPasswordDetails from '@/components/modals/EditPasswordDetails'
 import { PasswordContext, PasswordContextProvider } from '@/context/passwordContext'
 import dayjs from 'dayjs'
+import { ArrowLeft, ArrowRight } from 'iconsax-reactjs'
 import { Copy, Edit, Edit2, LayoutGrid, List, Search, Trash2 } from 'lucide-react'
 import React, { useContext, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
@@ -77,6 +78,24 @@ const Vault = () => {
 
     setSearchPassword(filtered)
   }
+
+  const [currentPage, setCurrentPage] = useState<number>(0)
+  const PAGE_SIZE = 6
+  const totalPassword = searchPassword.length
+  const noOfPages = Math.ceil(totalPassword / PAGE_SIZE)
+  const start = currentPage * PAGE_SIZE
+  const end = start + PAGE_SIZE
+  const handlePage = (n:number) => {
+    setCurrentPage(n)
+  }
+  const goToNextPage = () => {
+    setCurrentPage((prev) => prev + 1);
+  };
+  const goToPrevPage = () => {
+    setCurrentPage((prev) => prev - 1);
+  };
+  const visibleNumber = [...Array(noOfPages).keys()].slice(Math.max(0, currentPage - 1), Math.min(noOfPages, currentPage + 2))
+
   const isLoading = fetchLoading
 
   if (isLoading) {
@@ -129,7 +148,7 @@ const Vault = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {searchPassword.map((item: any) => (
+                  {searchPassword.slice(start, end).map((item: any) => (
                     <tr key={item.cred_id} className="border-b hover:bg-lime-50 transition-colors duration-200">
 
                       {/* Website */}
@@ -220,6 +239,14 @@ const Vault = () => {
 
             </div>
           )}
+          <div className="w-full flex items-center justify-center px-2 mt-10">
+            <button disabled={currentPage === 0} onClick={() => goToPrevPage()} className={`border px-2 py-1 rounded-lg border-neutral-300 text-neutral-600 me-2 text-xs flex items-center gap-1 ${currentPage === 0 ? 'cursor-not-allowed opacity-50' : 'cursor-pointer hover:text-neutral-700 hover:font-medium hover:border-lime-400 transition-all duration-300 hover:bg-lime-50'}`}><ArrowLeft size={16} />Prev</button>
+            {visibleNumber.map((n) =>
+            (
+              <button onClick={() => handlePage(n)} className={`px-3 py-1.5 border text-sm border-neutral-300 text-neutral-500 hover:text-neutral-700 hover:font-medium hover:border-lime-400 transition-all duration-300 cursor-pointer hover:bg-lime-50 ${currentPage === n && 'bg-lime-400 font-medium text-black scale-105 border-lime-400'}`} key={n}>{n + 1}</button>
+            ))}
+            <button disabled={currentPage === noOfPages - 1} onClick={() => goToNextPage()} className={`border px-2 py-1 rounded-lg border-neutral-300 text-neutral-600 ms-2 text-xs flex items-center gap-1 ${currentPage === noOfPages - 1 ? 'cursor-not-allowed opacity-50' : 'cursor-pointer hover:font-medium hover:border-lime-400 transition-all duration-300 hover:bg-lime-50 hover:text-neutral-700'}`}>Next<ArrowRight size={16} /></button>
+          </div>
         </div>
       </Layout>
       {openEdit && <EditPasswordDetails onClose={() => setOpenEdit(false)} password={selectedPassword} />}
