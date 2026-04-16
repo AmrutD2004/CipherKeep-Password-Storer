@@ -222,7 +222,7 @@ const Dashboard = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {usersPasswords.slice(0, 5).reverse().map((item: any) => (
+                  {usersPasswords.slice(0, 5).reverse().slice(0, 5).map((item: any) => (
                     <tr key={item.cred_id} className="border-b hover:bg-lime-50 transition-colors duration-200">
 
                       {/* Website */}
