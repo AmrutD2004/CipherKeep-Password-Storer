@@ -90,9 +90,9 @@ const Vault = () => {
     <>
       <Layout>
         <div className='bg-gray-100 flex flex-col space-y-3 lg:space-y-5 3xl:max-w-7xl overflow-hidden px-3 lg:px-0'>
-          <div className='w-full flex items-center justify-between'>
-            <div className='px-5 py-3 flex items-center justify-start gap-4'>
-              <h1 className='text-2xl tracking-tight leading-tight'>My Vault</h1>
+          <div className='w-full flex items-center justify-between pe-5 py-4'>
+            <div className='flex items-center justify-start gap-4'>
+              <h1 className='text-2xl tracking-tight leading-tight text-start'>My Vault</h1>
               <span className='text-lime-500 px-2 font-semibold text-sm rounded-full bg-lime-100 border border-lime-500'>{usersPasswords.length}</span>
             </div>
             <div className='flex items-center justify-end gap-4'>

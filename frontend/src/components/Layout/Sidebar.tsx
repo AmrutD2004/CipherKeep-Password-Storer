@@ -1,7 +1,7 @@
 import { AuthContext } from '@/context/authContext'
 import { FolderLock, Home, LogOut, Settings, Space } from 'lucide-react'
 import React, { useContext, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { Button } from '../ui/button'
 
 const Sidebar = () => {
@@ -45,7 +45,7 @@ const Sidebar = () => {
             <div className='flex h-full flex-col gap-3'>
                 <div className='w-full flex items-center'>
                     <div className='flex items-start justify-start p-5 gap-3 relative'>
-                        <label className='font-semibold tracking-tight text-lime-500 text-2xl text-shadow-sm'>ClpherKeep</label>
+                        <Link to={'/'} className='font-semibold tracking-tight text-lime-500 text-2xl text-shadow-sm'>ClpherKeep</Link>
                         <span className='bg-lime-500 rounded-full p-[3px] absolute left-[37px] top-4 animate-pulse'></span>
                     </div>
                     <div className='flex items-end justify-end w-full'>
