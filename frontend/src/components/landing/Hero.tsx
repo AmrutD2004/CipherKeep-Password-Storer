@@ -8,16 +8,88 @@ const Hero = () => {
     return (
         <>
             <div className='w-full grid grid-cols-1 lg:grid-cols-2 gap-4 px-1 relative'>
-                <div className='lg:w-145 text-neutral-800'>
-                    <h1 className='text-5xl font-semibold'>Navigate Your Digital Security with <span className='bg-lime-300 italic font-bold'>Confidence, Simplicity,</span> and Strength.</h1>
-                </div>
-                <div className='w-full flex flex-col items-start lg:items-end justify-end'>
+                <motion.div
+                    initial={{
+                        opacity: 0,
+                        x: -50,
+                        y: -20,
+                        rotate: -20
+                    }}
+                    animate={{
+                        opacity: 1,
+                        x: 0,
+                        y: 0,
+                        rotate: 0
+                    }}
+                    transition={{
+                        duration: 0.5,
+                        ease: 'easeInOut',
+                        delay: 0.1
+                    }}
+                    className='lg:w-145 text-neutral-800'>
+                    <h1 className='text-5xl font-semibold'>Navigate Your Digital Security with <motion.span
+                        initial={{
+                            opacity: 0,
+                            x: -50,
+                            filter: "blur(5px)",
+
+                        }}
+                        animate={{
+                            opacity: 1,
+                            x: 0,
+                            filter: "blur(0px)",
+                        }}
+                        transition={{
+                            duration: 0.6,
+                            ease: "easeOut",
+                            delay: 0.3
+                        }}
+                        className="bg-lime-300 italic font-bold"
+                    >
+                        Confidence, Simplicity,
+                    </motion.span> and Strength.</h1>
+                </motion.div>
+                <motion.div
+                    initial={{
+                        opacity: 0,
+                        x: 20,
+                        y: 20,
+                        rotateX: -80,
+                        rotateZ: 20
+                    }}
+                    animate={{
+                        opacity: 1,
+                        x: 0,
+                        y: 0,
+                        rotateX: 0,
+                        rotateZ: 0
+                    }}
+                    transition={{
+                        duration: 0.5,
+                        ease: 'easeInOut',
+                        delay: 0.1
+                    }}
+                    className='w-full flex flex-col items-start lg:items-end justify-end'>
                     <p className='lg:w-90 text-base tracking-tight text-neutral-500 font-medium'>Take control of your passwords with intelligent organization and powerful protection designed to keep your digital life secure and effortless.</p>
-                    <div className='flex items-start justify-start gap-2 mt-5 lg:w-90'>
+                    <motion.div
+                        initial={{
+                            opacity: 0,
+                            x: 10,
+                        }}
+                        animate={{
+                            opacity: 1,
+                            x: 0,
+                        }}
+                        transition={{
+                            duration: 0.3,
+                            ease: 'easeInOut',
+                            delay: 0.8
+                        }}
+                        className='flex items-start justify-start gap-2 mt-5 lg:w-90'>
                         <Button onClick={() => navigate('/auth')} className='px-5 py-4  text-sm font-semibold bg-[#CCFF00] text-black transition-colors duration-200 hover:bg-lime-300 drop-shadow-xl drop-shadow-lime-100'>Get Started</Button>
                         <Button onClick={() => navigate('/auth')} className='px-5 py-4 text-sm tracking-tight font-semibold bg-gray-100 border border-neutral-300 hover:bg-gray-200 transition-colors duration-200 text-neutral-800 '>Sign In</Button>
-                    </div>
-                </div>
+                    </motion.div>
+                </motion.div>
 
             </div>
             <motion.div
@@ -27,6 +99,10 @@ const Hero = () => {
 
                 }}
                 animate={{
+                    opacity: 1,
+                    y: 10
+                }}
+                whileInView={{
                     opacity: 1,
                     y: 10
                 }}
@@ -48,6 +124,10 @@ const Hero = () => {
 
                 }}
                 animate={{
+                    opacity: 1,
+                    y: 0
+                }}
+                whileInView={{
                     opacity: 1,
                     y: 0
                 }}

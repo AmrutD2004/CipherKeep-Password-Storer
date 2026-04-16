@@ -1,6 +1,7 @@
 import { AuthContext } from '@/context/authContext'
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Footer from './Footer'
 
 const HowitWork = () => {
     const { isLoggedIn } = useContext(AuthContext)
@@ -23,17 +24,20 @@ const HowitWork = () => {
                             type="email"
                             placeholder="you@email.com"
                             readOnly
+                            disabled
                             className="w-full bg-neutral-800/50 border border-neutral-700 rounded-xl px-4 py-3 text-white placeholder-neutral-500 focus:outline-none focus:border-lime-400 focus:ring-1 focus:ring-lime-400 transition-all cursor-default"
                         />
                         <input
                             type="password"
                             placeholder="••••••••••••"
                             readOnly
+                            disabled
                             className="w-full bg-neutral-800/50 border border-neutral-700 rounded-xl px-4 py-3 text-white placeholder-neutral-500 focus:outline-none focus:border-lime-400 focus:ring-1 focus:ring-lime-400 transition-all cursor-default"
                         />
                         <button 
-                            onClick={() => isLoggedIn ? navigate('/vault') : navigate('/auth')} 
-                            className="w-full bg-lime-400 hover:bg-lime-300 text-black font-semibold py-3.5 px-6 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 mt-6 group"
+                            onClick={() => isLoggedIn ? navigate('/vault') : navigate('/auth')}
+                            disabled
+                            className="w-full bg-lime-400 hover:bg-lime-300 text-black font-semibold py-3.5 px-6 rounded-xl flex items-center justify-center gap-2 transition-all duration-200 mt-6 group disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             Create vault
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-1 transition-transform">
@@ -71,7 +75,7 @@ const HowitWork = () => {
                                 <span className="text-xs px-2 py-0.5 rounded bg-green-400/20 text-green-400">Strong</span>
                             </div>
                         </div>
-                        <button className="w-full bg-lime-400 hover:bg-lime-300 text-black font-semibold py-3 rounded-xl transition-all duration-200 mt-2">
+                        <button className="w-full bg-lime-400 hover:bg-lime-300 text-black font-semibold py-3 rounded-xl transition-all duration-200 mt-2 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
                             Save to vault
                         </button>
                     </div>
@@ -92,11 +96,11 @@ const HowitWork = () => {
                     <div className="space-y-3">
                         <div className="bg-neutral-800/50 border border-lime-400/50 rounded-xl px-4 py-3">
                             <label className="text-xs text-lime-400 uppercase tracking-wide">Website</label>
-                            <input type="text" defaultValue="github.com" readOnly className="w-full bg-transparent text-white mt-1 focus:outline-none" />
+                            <input type="text" defaultValue="github.com" readOnly disabled className="w-full bg-transparent text-white mt-1 focus:outline-none" />
                         </div>
                         <div className="bg-neutral-800/50 border border-neutral-700 rounded-xl px-4 py-3">
                             <label className="text-xs text-neutral-500 uppercase tracking-wide">Category</label>
-                            <select className="w-full bg-transparent text-white mt-1 focus:outline-none cursor-pointer">
+                            <select className="w-full bg-transparent text-white mt-1 focus:outline-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed" disabled>
                                 <option className="bg-neutral-800">Work</option>
                                 <option className="bg-neutral-800">Social</option>
                                 <option className="bg-neutral-800">Banking</option>
@@ -104,9 +108,9 @@ const HowitWork = () => {
                         </div>
                         <div className="bg-neutral-800/50 border border-neutral-700 rounded-xl px-4 py-3">
                             <label className="text-xs text-neutral-500 uppercase tracking-wide">New Password</label>
-                            <input type="password" placeholder="••••••••••••" className="w-full bg-transparent text-white mt-1 focus:outline-none placeholder-neutral-600" />
+                            <input type="password" placeholder="••••••••••••" disabled className="w-full bg-transparent text-white mt-1 focus:outline-none placeholder-neutral-600" />
                         </div>
-                        <button className="w-full bg-lime-400 hover:bg-lime-300 text-black font-semibold py-3 rounded-xl transition-all duration-200 mt-2">
+                        <button className="w-full bg-lime-400 hover:bg-lime-300 text-black font-semibold py-3 rounded-xl transition-all duration-200 mt-2 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
                             Update entry
                         </button>
                     </div>
@@ -132,10 +136,10 @@ const HowitWork = () => {
                         </div>
                     </div>
                     <div className="flex gap-3 mt-6">
-                        <button className="flex-1 bg-neutral-800 hover:bg-neutral-700 text-white font-medium py-3 rounded-xl transition-all duration-200">
+                        <button className="flex-1 bg-neutral-800 hover:bg-neutral-700 text-white font-medium py-3 rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
                             Cancel
                         </button>
-                        <button className="flex-1 bg-red-500 hover:bg-red-400 text-white font-semibold py-3 rounded-xl transition-all duration-200">
+                        <button className="flex-1 bg-red-500 hover:bg-red-400 text-white font-semibold py-3 rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
                             Delete
                         </button>
                     </div>
@@ -176,6 +180,9 @@ const HowitWork = () => {
                     </div>
                 ))}
             </div>
+            <footer>
+                <Footer />
+            </footer>
         </div>
     )
 }
