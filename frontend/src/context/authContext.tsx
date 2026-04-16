@@ -61,7 +61,6 @@ export const AuthContextProvider = ({ children }: props) => {
     const isauth = async () => {
         try {
             const data = await isAuthenticated()
-            console.log(data)
             if (data.success) {
 
                 setLoggedIn(true)
