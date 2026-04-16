@@ -2,7 +2,7 @@ import axios from 'axios'
 
 
 const api = axios.create({
-    baseURL : "https://cipher-keep-password-storer-a8n6.vercel.app/",
+    baseURL : import.meta.env.VITE_BASE_URL,
     withCredentials : true
 })
 
