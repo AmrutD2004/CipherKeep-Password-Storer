@@ -11,7 +11,7 @@ import toast from 'react-hot-toast'
 const Vault = () => {
   const { usersPasswords, fetchLoading } = useContext(PasswordContext)
   const [activeCategory, setActiveCategory] = useState<string>('')
-  const [layout, setLayout] = useState<string>('list')
+  const [layout, setLayout] = useState<string>('grid')
   const category = ['Social', 'Banking', 'Work', 'Entertainment', 'Others']
 
   const [searchPassword, setSearchPassword] = useState([])
