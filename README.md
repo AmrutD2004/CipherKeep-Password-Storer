@@ -3,6 +3,7 @@
 CipherKeep is a secure and intuitive password management application designed to help users store, organize, and manage their credentials safely.
 
 🚀 Features
+
 🔒 AES-256 Encryption
 🧠 Organized password vault with categories
 🔍 Fast search and filtering
@@ -12,6 +13,7 @@ CipherKeep is a secure and intuitive password management application designed to
 🔐 Google OAuth 2.0 login support
 📱 Responsive UI (grid + list views)
 🔑 Authentication
+
 
 CipherKeep supports two authentication methods:
 
