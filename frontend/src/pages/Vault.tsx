@@ -11,7 +11,7 @@ import toast from 'react-hot-toast'
 const Vault = () => {
   const { usersPasswords, fetchLoading } = useContext(PasswordContext)
   const [activeCategory, setActiveCategory] = useState<string>('')
-  const [layout, setLayout] = useState<string>('list')
+  const [layout, setLayout] = useState<string>('grid')
   const category = ['Social', 'Banking', 'Work', 'Entertainment', 'Others']
 
   const [searchPassword, setSearchPassword] = useState([])
@@ -206,7 +206,7 @@ const Vault = () => {
 
           {layout === 'grid' && (
             <div className='w-full grid grid-cols-1 lg:grid-cols-3 gap-3 '>
-              {searchPassword.map((item: any) => (
+              {searchPassword.slice(start, end).map((item: any) => (
                 <div key={item.cred_id} className='border border-neutral-300 px-5 py-3 bg-white rounded-lg shadow  group w-full hover:scale-102 transition-all duration-300'>
                   <div className='w-full flex flex-col items-start justify-start gap-2'>
                     <div className='flex flex-col lg:flex-row items-center w-full  gap-2'>
